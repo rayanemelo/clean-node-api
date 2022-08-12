@@ -1,5 +1,5 @@
 import { SignUpController } from './signup'
-
+import { MissingParamError } from '../errors/missing-param-error'
 describe('SignUp Controller', () => {
   test('Deve retornar 400, se o nome não for fornecido', () => {
     const sut = new SignUpController()
@@ -13,7 +13,7 @@ describe('SignUp Controller', () => {
     }
     const httpResponde = sut.handle(httpRaquest)
     expect(httpResponde.statusCode).toBe(400)
-    expect(httpResponde.body).toEqual(new Error('Missign param: name'))
+    expect(httpResponde.body).toEqual(new MissingParamError('name'))
   })
 
   test('Deve retornar 400, se o email não for fornecido', () => {
@@ -27,6 +27,6 @@ describe('SignUp Controller', () => {
     }
     const httpResponde = sut.handle(httpRaquest)
     expect(httpResponde.statusCode).toBe(400)
-    expect(httpResponde.body).toEqual(new Error('Missign param: email'))
+    expect(httpResponde.body).toEqual(new MissingParamError('email'))
   })
 })
